@@ -1,0 +1,304 @@
+Skip to content
+Chat history
+You said:
+Copilotー + 1 4 o f 2 0 3. lechnical architectura Layer architecture What is layer archtecture? Allianz Manipulation takes place only in the responsible layer Individual layers are decoupled from each other Use of individual layers by different applications Layer Presentation layer (for presentation and interaction with the user) Business layer (contains the business logic) Persistence layer (controls transfer of data from/to database) H o s t L o c a l DB (DB2) DB (Sybase) Separation of program code in layers simplifies maintenance and further development. ABS Lawl | Banx - System propertas metafinanz' 15 3. Techrical archnecture Allianz Batch Services What are batches? Batch are used for rapid mass data processing The batch programs can be controlled (parallelized, paused, ended) and scaled depending on time and/or work load on the server. The workload is stored in the database in order to allocate, correct, escalate, delay etc. work volume. They provide standardised and regular database maintenance. Batches can be monitored on the application side by various means. 480 Laval i fleale - Spear propertis m e t a l i n a n z * ABS Livet 1 Bile - System properties metalinanz* 18 Allianz 41 Introduction 2 Functional architecture 3 Technical architecture 4 Core release management 5 Summary I ABS Level I Basic - Syaam propatti metafinanz* 4. Core release management Release management How do the ABS core releases take place? Allianz 2 major releases incl. DB update per year I n May and in November for Allianz Austria • I n J u n e and December for all other ABS customers • Individual releases cannot be skipped; however, the ABS customer can determine the time of the release change • Each release is only supported for one year. • Attention: Defects are only corrected in the supported versions. Introduction Functional architecture Technical architecture 5 Core release management Summary I ABS Level 1 Brac - Syatem propertica metafinanz* 5. Summary Summary What should we keep in mind? You should now have knowledge about the following: distinction between basic and cross-cutting functionalities general structure of the data model special features of ABS procedure for functional extension of the Core basic design of a file basic technical system properties process of Core release change ABB Laval & Baaic - Bystam proportian metafinanz* M I L O T I A 19 Allianz 20 Allianz Contents of the module What can you expect in this unit? You get an insight into: The features and structure of the company-wide data model The basic concepts within the data model The options for extending the core data model IT architecture (A3K Framework, Client and Batch) P e r s o n Contract Claim Workilow Organisation Gollection/disbursement Commission Product Document management ABS Core concepts The company-wide data model is used to store all data relevant to inventory management within a database ABS Level 1 Basic / Data Model m e t a l i n a n z * Allianz 1 2 I n t r o d u c t i o n Basic concepts Data model extensions 3 4 Summary ABS Live | Bane / Dula Moche 1. Introduction Allianz I Company-wide unified data model (UDM) What distinguishes UDM? I s the basis for • The ABS Client/Server and batch system • And for an integrated system It also supports • multiple-client capability •multilingual capability • multicurrency capability • historisation • sub-ledger accounting • workflow control It serves to regulate language use and to define concepts 4 5 • Logical and physical models are identical • the data model is identical online (host) as well as offline (agent laptop) • However, "offline" not al tables are filled completely While creating ABS data from various subsystems were consolidated into one company-wide unified data model. A99 Level I Bauc/ Data Model metafinanz* 1. Introduction Division of the d a t a model How is UDM divided? Allianz Subdivision of UDM in: Operational data • Contain all relevant data for inventory management and are subdivided into 9 functional objects Contain the "Business Object" • Contain work tables for special areas of application Defining data • Contains defining data, which is divided into 32 defining data areas • Are read only by the ABS application, cannot be changed in productive system Division ensures easier maintenance of the data model. Operational data UDM Company-wide data model Defining data (extract) Property Contract Third party contract Commission Product Domains Assignment Person Feedback Role Orga Loss event L o s s e v e n t Claim Accumula- tion risk Workflow Company configuration tdata 1. Introduction Allianz Representation of UDM (extract) How is a data model designed? While operational data are written by the ABS application, definition and maintenance of defining data mostly takes place via special applications. A83 Levia | Basic / Data Model metahnanz* Allianz 2 1 Introduction 2 Basic concepts 3 Data model extensions 4 Summary 7 m e t a W i d e 2. Basic concepts Basic concepts Which terms are used in relation to the UDM? F O Person (TPERSON) F O Property (TSACHE) Allianz F O L o s s e v e n t (TEREIGNIS) Business o b j e c t (TGSCHFALL) HIST Person (HPERSON) HIST Property (HSACHE) F O Third party contract (TREMOVE TRAG) FO Contract (TVERTRAG) Defining data Product Role (THSP _PRODUKT) (TSIELLE) HIST Contract (NVERTRAG) F O FO Clalm F O Assign- F e e d - ISCHADEN. m e n t b a c k (TAUF TRAG) (YBESCHWE RDE) FO A c c u m u . lation r i s k (TKUMULRIS/ ко) Domain (YDOMAIN) HIST HIST Feed- Accumu- b a c k lation r i s k (HBESCHWE ROE) [ H K U M U L R I S ) KOY Work tables Functional objects access defining data. Processing takes place via the business object with the help of performance increasing work tables. ABS Level 1 Basic / Dala Mode metafinanz* 2. Basic concepts Allianz Basic concepts - Functional Objects What are functional objects? Functional Objects: are bundles of tables and related functionalities A functional Object contains all information relevant for insurances: 1. for objects of the real world: Person, Property, Loss Event and 2. for objects of the business world: Contract, Claim, Assignment, Third Party Contract, Feedback, and Accumulation Risk Functional Objects bundle the operational tables according to their functional usage. Basic concepts - Business Object What is a business obyect? The Business Object controls processing of the functional objects Is a bundle of tables and functionalities provided to the functional objects Whenever a functional object is created a corresponding business object is created. Each change to a functional object is logged using the "business object activity". Examples of the functionalities are: • Business process status • Logging / historization • Process slips / scheduled tasks The Business Object enables processing of insurance processes over multiple functional objects. ABS Level I Basic i Outa Mos m e t a l i n a n z 2. Basic concepts Business Object functionalities How are the tabies of the business object connected to each other? Allianz Comment / remark TBEMERKUNG Process slip TLAUFZETTEL Sales date TVERKTERMIN Scheduled t a s k TTERMIN / TBATCHTERMIN D o c u m e n t TOOKUMENT not all FO are historized Business object • Business process status - Business abject type TGSCHFALL Business object activity • User ID • Activity • Log date TGSCHFAKT Change log • WITH history TVERPROTOKOLL Contact history TKONTAKTHIST Question / a n s w e r TFRAGEANTWORT Change TVERAENDERUNG Change documentation TAENDDDOKU Change log -WITHOUT history TVERPROTNHIST H-tables for XY The Business Object consists of special tables with functionalities provided to the Functional Objects. ABS Luve I Eas: ( La ما Maxkel m e t a l i a n * 2. Basic concepts Basic concepts - work tables Where are work tables used? Allianz T h e work tables: Tables with redundant information for improving the performance - e.g. for worklists For automatic allocation of object identifiers like policy number and claim number Tables for controlling batch services, e.g. batch protocol, restart control Entries in these tables are mostly created by batches and deleted after processing Vork tables accelerate the work process and support handling processing in ABS. ABS L e v i t B a s / Data Model m e t a fi n a n z 13 2. Basic concepts Basic concepts - Defining data (DD) What are DD? Allianz Defining data: are subdivided into 32 pre-specified areas (e.g. domains, letter writing, product, funds, company configuration data, workflow, commission) ABS uses defining data in read only mode Core offers special applications for maintaining DD e.g. Configuration Suite Update and maintenance of defining data tables takes place in a test & development environment, after checks and validations, data is synchronized with the production database Changes to the defining data can be documented via log tables Defining data guide the processes in ABS. AB3 Lavil S Baak 1 Dala Mochel metafinanz* 14 A r e a Usage Product • Model products and define related functionalities needed for handling these products in ABS. • Product explorer (PEx) Domains • Define valid values for attributes. * Contain descriptions of these values as long texts. • Configuration Suite Commission * Controls functionalities related to the commission calculation * Configuration Suite Loss event * Controls various functionalities during • Product explorer (PEx) claim processing Orga • Maps the organizational structure. • Configuration Suite Roles • Contain information about authorizations and their interactions with the Organizational structure. • Configuration Suite 2. Basic concepts Allianz I Basic concepts - defining data examples Which DDs exist and how are they maintained? Maintenance / update ABS Lovet 1 Basic / Duba Mochei m e t a f i n a n z * 15 Allianz 1 2 3 Introduction Basic concepts D a t a m o d e l e x t e n s i o n s 4 S u m m a r y A ظ S La t Eak 1 Cala Mcxhe metatinanz b71eb-961b-4524-998b-d36484379b27_Fw_%20ABS%20L1%20Functional% Copilotー + 1 7 o f 23 3. Data model extensions Options for extending the data model (1/3) How can the core data model be modified? Allianz Extension of the data model by the Core (CCC): Inclusion of individual attributes in the existing Core tables Inclusion of new tables in the data model of the Core. Example - extending of core table TVERTRAG with a new attribute: TVERTRAG ABS Level I Basic / Data Modei metafinanz* VERTRE CHAR(38) «PK› COMPANY CHAR(2) DIRECTORATE CHAR(2) POLLFNR CHAR(2) VERTART CHAR(2) PHASE CHAR(2) B E G D A T DATE WIRKBECDAT DATE COLLECTIVE TRANSFER_FLAG CHAR(TI 17 3. Data model extensions Allianz Options for extending the data model (2/3) How can the core data model be modified? Modelling of additional customer-specific tables: Modelling of new customer-specific tables, which are coupled 1:1 as appendixes to a table of the C o r e d a t a model Modelling of new customer-specific tables, which - if required - are also coupled with the Core d a t a m o d e l Example - extension of the core table TVERTRAG by a customer-specific table TDE1_VERTRAG: TVERTRAG VERTAN CHAR(38) «PK* COMPANY CHAR(2) D I R E C T O R A T E C H A R （ 2 ） POLLFNA CHAR(2) VERTART CHAR(2) PHASE C H A R （ 2 ） B E G D A T DATE WIRKBECOAT DATE TDE1_VERTRAG DE 1_VERTRU CHAR(36) <PK* VORSYS CHARS) DE1_BOTYP CHAR) DE1 ZUSTAND CHAR(1) VERTRA CHAP(36) •FK* 3. Data model extensions Options for extending the data model (3/3) How can the core data model be modfied? Allianz Use of vertical ("generic") tables: Attributes are mapped using an existing vertical table provided by the Core. These tables are provided for fundamental core tables (i.e. TVERTRAG, PERSON, SCHADEN, ...) Configuration takes place manually via the Configuration Suite. Used for information: • which are only significant for a small part of a functional object (e.g. during migration) • which change structurally relatively frequently (e.g. product-specific contract information) • are needed at short notice without the option of adjusting the data model ABS Level i Basic / Dula Modie m e t a t i n a n z 19 Allianz 4 1 Classification and overview 2 3 4 Basic concepts Data model extensions Summary Summary What should we keep in mind? You should now have knowledge about the following: The features and structure of the UDM. Features of a Functional Object, Business Object, Business Object functionalities; defining data and work tables Data model extensions AB3 Level I Bast / Dula Moda metafinanz* 21 4. Summary Sample test question Allianz Allianz C h i 2 K a g a t i c e 1 2 9 3 1 8 5 : 8 7 11 12113 14 15 16 17 1 8 20 21| 2 2 29,24 23 26 2 7 2 8 2 0 3 0 31/ 34,35 36 57J 0 | 6D 82 44 15/36 47 4 B 49 5 0 51 5 2 53| 51 S S 58:57 5 0 G 67:60 1 7 1 T J 7 4 P 5 76 4 0 $ 1 82 8 Y 0 5 Ut 8 7 8 0 019 90 $ 1 $ 4 6 t r u 1 0 0 1 0 : 1 0 . 1 0 : 8 0 4 1 0 2 1 8 4 0 0 6 5 0 2 - 1 8 5 1 2 0 1 8 8 7 1 3 1 1 2 1 4 8 1 9 5 9 1 6 . + 1 8 1 9 U 1 1 9 1 2 4 S p i c h W o s e r n e t Time ict 1.2050 Our siven 8 Not yet angereed Marvad cul et 1.00 * l a g suction 03.0002: Which of the following statements are true? Serect one or more T A The data model is idendcal onane as mel as omme 5 E The logca sno preical data models are dentca C The online and offine data models are not icentral metalmary*give me in proper format
+ChatGPT said:
+Got it 👍
+You’ve shared raw slide notes/screenshots from Allianz ABS Level 1 training (Functional / Technical Architecture, Data Model, Release Management).
+I’ll reformat them into a clean, structured study/summary document with headings, bullet points, and clarity.
+ 
+Allianz ABS – Level 1 (Summary Notes)
+1. Introduction
+•	ABS (Allianz Business System) is based on a company-wide unified data model (UDM).
+•	Supports:
+•	Client/Server and Batch systems
+•	Integrated workflows
+•	Multi-client, multilingual, multicurrency
+•	Historisation
+•	Sub-ledger accounting
+•	Workflow control
+ 
+2. Functional Architecture
+•	Basic vs. Cross-cutting functionalities are distinguished.
+•	Core components handle:
+•	Person
+•	Contract
+•	Claim
+•	Workflow
+•	Organisation
+•	Collection/Disbursement
+•	Commission
+•	Product
+•	Document management
+ 
+3. Technical Architecture
+Layered Architecture
+•	Presentation Layer – User interaction
+•	Business Layer – Business logic
+•	Persistence Layer – Database access
+Features:
+•	Decoupled layers → easy maintenance & further development
+•	Individual layers reusable by different applications
+Databases:
+•	Host Local DB (DB2, Sybase, etc.)
+ 
+Batch Services
+•	Used for rapid mass data processing.
+•	Features:
+•	Can be controlled (parallelized, paused, ended, scaled).
+•	Workload stored in DB for allocation, correction, escalation, delay.
+•	Supports standardized DB maintenance.
+•	Monitoring possible on application side.
+ 
+4. Core Release Management
+•	Major Releases:
+•	2 per year (with DB updates).
+•	May & November → Allianz Austria.
+•	June & December → Other ABS customers.
+•	Rules:
+•	Releases cannot be skipped.
+•	Customer decides release change timing.
+•	Each release supported for 1 year only.
+•	Defect fixes only in supported versions.
+ 
+5. Data Model (UDM)
+Division
+•	Operational Data:
+•	9 functional objects (e.g., Person, Contract, Claim, etc.)
+•	Business Objects:
+•	Bundle of FO + functionalities.
+•	Provide logging, historisation, workflow control.
+•	Examples:
+•	Business process status
+•	Logging, slips, scheduled tasks
+•	Defining Data (DD):
+•	32 pre-specified areas (Domains, Product, Workflow, Commission, Org, Roles, etc.)
+•	Read-only in production, maintained via Configuration Suite.
+•	Work Tables:
+•	Contain redundant info for performance.
+•	Control batch services, auto ID generation.
+ 
+Functional Objects (FO)
+•	Bundles of tables & related functionalities.
+•	Represent both real-world & business-world objects:
+•	Real-world: Person, Property, Loss Event
+•	Business-world: Contract, Claim, Assignment, Third Party Contract, Feedback, Accumulation Risk
+ 
+Business Objects
+•	Enable processing across multiple FOs.
+•	Tables include:
+•	Business process status (TGSCHFALL)
+•	Logs (TVERPROTOKOLL, TGSCHFAKT)
+•	Document (TDOKUMENT)
+•	Contact history (TKONTAKTHIST)
+•	Change logs (with/without history)
+ 
+6. Data Model Extensions
+Three options to extend Core Data Model:
+1.	Core Extension (CCC):
+•	Add new attributes to existing Core tables.
+•	Add new Core tables.
+2.	Customer-Specific Tables:
+•	Append tables (1:1 with Core tables).
+•	Independent but coupled if needed.
+3.	Vertical (Generic) Tables:
+•	Provided for main Core tables (e.g., Contract, Person, Claim).
+•	Used for attributes:
+•	Only relevant for a small FO subset.
+•	Changing frequently (e.g., product-specific).
+•	Needed at short notice.
+ 
+7. Summary
+Key learnings:
+•	Distinction: basic vs. cross-cutting functionalities.
+•	Structure of UDM.
+•	FO, BO, Work tables, Defining Data.
+•	Data model extension options.
+•	Core release process.
+•	Technical system properties.
+ 
+8. Sample Test Question
+Q: Which of the following statements are true?
+1.	The data model is identical online and offline.
+2.	The logical and physical data models are identical.
+3.	The online and offline data models are not identical.
+✅ Correct: 1 & 2
+ 
+
+Allianz ABS – Organisation, Authorisation Model & Workflow
+Agenda
+1.	Introduction
+2.	Organisation & Authorisation Model
+3.	Workflow
+4.	Summary
+ 
+Module Overview
+What to expect in this unit?
+You will gain insights into:
+•	Organisation model → Structure of the insurance company
+•	Authorisation model → Rights & access control in ABS
+•	Workflow → Allocation and routing of work assignments
+IT Architecture Context (A3K Framework, Client & Batch):
+•	Person
+•	Contract
+•	Claim
+•	Organisation
+•	Collection/Disbursement
+•	Commission
+•	Product
+•	Document Management
+ 
+Organisation Model
+•	Maps the structure of the insurance company.
+•	Provides the basis for ABS workflow.
+•	Ensures correct routing of work and responsibilities.
+ 
+Authorisation Model
+•	Determines who can use what in ABS.
+•	Controls access based on roles and responsibilities.
+•	Ensures compliance with organisational rules.
+ 
+Workflow
+•	Purpose: Ensures allocation of work orders to responsible teams.
+•	Key Components:
+o	Workflow processes from the user’s perspective.
+o	Routing for allocation of work assignments.
+o	Integration with organisation and authorisation models.
+ 
+Core Concept
+•	Organisation model → defines company structure.
+•	Authorisation model → defines user access.
+•	Workflow → links both models to manage tasks effectively.
+ 
+Summary
+At the end of this module, you should understand:
+•	How the organisation model maps company structure.
+•	How the authorisation model manages rights in ABS.
+•	How the workflow ensures efficient allocation of tasks.
+
+Allianz ABS – Collection & Disbursement (C/D)
+Agenda
+1.	Introduction
+2.	Collection/Disbursement Components within ABS (basic functionalities)
+3.	Cross-cutting C/D Functionalities
+4.	Overview of C/D Batches
+5.	Interfaces of C/D with External Systems
+6.	Summary
+ 
+Module Overview
+What can you expect in this unit?
+You will gain insights into:
+•	Basic C/D Components of ABS
+•	Cross-cutting functionalities (bookings, worklists)
+•	Usage of C/D by functional objects (Person, Contract, Claim, Org)
+•	C/D Batches of the ABS Core
+•	Interfaces for communication with third-party systems
+ 
+Collection & Disbursement in ABS
+•	Covers invoicing and payment transaction functions.
+•	Main areas:
+o	Premium (policyholder payments)
+o	Claim (payouts to customers)
+o	Commission (payments to intermediaries/agents)
+ 
+Functional Objects using C/D
+•	Person
+•	Contract
+•	Claim
+•	Organisation
+These functional objects leverage C/D components to manage financial transactions consistently across ABS.
+ 
+Cross-Cutting Functionalities
+•	Bookings – record financial transactions consistently across modules.
+•	Worklists – support allocation, monitoring, and follow-up of C/D tasks.
+•	Integrated into all relevant business processes.
+ 
+Collection/Disbursement Batches
+•	Purpose: Handle large-volume, repetitive financial operations.
+•	Examples:
+o	Premium collection runs
+o	Commission settlements
+o	Claim disbursements
+•	Benefits: Efficiency, automation, regular database maintenance.
+ 
+Interfaces with External Systems
+•	Ensure smooth communication with third-party financial systems.
+•	Examples:
+o	Payment providers
+o	Banking systems
+o	External accounting systems
+•	Enable secure data transfer and compliance.
+ 
+Summary
+By the end of this module, you should understand:
+•	The role of Collection/Disbursement components in ABS.
+•	How C/D functionalities (bookings & worklists) are cross-cutting.
+•	How functional objects use C/D for financial processes.
+•	The batch processes that automate C/D operations.
+•	The interfaces that connect ABS to external financial systems.
+Agenda
+1.	Classification and Overview
+2.	A3K+ Architecture Overview
+3.	A3K+ Framework Client
+4.	Core Release Change
+5.	Summary
+ 
+Module Overview
+What can you expect in this unit?
+You will gain insights into:
+•	Workings of the A3K+ framework and its basic principles
+•	Basic concepts for client development and their application
+•	Sample process of client core release change
+•	Integration with ABS components:
+o	Person
+o	Contract
+o	Claim
+o	Workflow
+o	Organisation
+o	Collection/Disbursement
+o	Commission
+o	Product
+o	Document Management
+ 
+Classification & Overview
+•	ABS has been developed using the A3K+ framework.
+•	Provides a structured IT architecture with:
+o	Framework layer (A3K+ runtime and tools)
+o	Client layer (end-user application interface)
+o	Batch layer (mass data processing)
+ 
+A3K+ Architecture Overview
+•	Framework foundation: provides reusable services and components.
+•	Ensures standardisation across all ABS modules.
+•	Decouples application logic from infrastructure.
+•	Supports:
+o	Multi-client environments
+o	Workflow integration
+o	Centralised release management
+ 
+A3K+ Framework Client
+•	The Client is the user-facing component built on A3K+.
+•	Features:
+o	Standardised GUI elements
+o	Integration with business objects (e.g., Person, Contract, Claim)
+o	Workflow-driven navigation
+o	Consistent handling of data (via UDM – Unified Data Model)
+•	Provides extensibility for functional and customer-specific enhancements.
+ 
+Core Release Change (Client Perspective)
+•	Process:
+o	Regular updates are rolled out as part of ABS Core releases.
+o	Client components must be aligned with new framework versions.
+o	Ensures compatibility with updated business logic and data model.
+•	Impact on Client:
+o	GUI updates, functional extensions, and bug fixes are applied.
+o	Customers cannot skip releases (must follow schedule).
+o	Each release supported only for 1 year.
+ 
+Summary
+By the end of this module, you should understand:
+•	The role of A3K+ framework in ABS architecture.
+•	How the client is structured and developed on A3K+.
+•	The integration of business modules (Person, Contract, Claim, etc.) with A3K+.
+•	The process of Core release change from the client perspective.
+
